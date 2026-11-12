@@ -4,6 +4,13 @@
 
 **Team Runtime Terrors:** Abdul Zakir (team lead), Muhammad Kashif, Huzefa Aslam
 
+| Submission item | Link |
+|---|---|
+| Live app | [fairshed.streamlit.app](https://fairshed.streamlit.app) |
+| 3-minute video pitch and demo | [Google Drive](https://drive.google.com/file/d/1GNZddvKO6-_PV2KvJzHGPbF4FQYLX6p4/view?usp=sharing) |
+| Report (.docx, with architecture diagram, results and limitations) | [report/FairShed_Report.docx](report/FairShed_Report.docx) |
+| Code | this repository |
+
 When electricity supply falls short, a distribution company has to decide which
 feeders go dark in which hour. A fixed priority list always cuts the same
 neighbourhoods. FairShed formulates the decision as a quadratic binary
