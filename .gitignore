@@ -7,7 +7,9 @@ node_modules/
 package-lock.json
 package.json
 results/run_log.txt
+~$*
 
-# Local-only files: the organisers' brief and the video script
+# Local-only files: the organisers' brief, the video script and raw video clips
 Qiskit_Hackathon_Optimization.docx
 VIDEO_SCRIPT.md
+video clips/
