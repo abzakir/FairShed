@@ -108,7 +108,7 @@ const children = [
   new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "FairShed", font: FONT })] }),
   p("A quantum (QAOA) scheduler for fair load shedding", { run: { size: 28, color: "52514E" }, para: { spacing: { after: 60 } } }),
   p("Qiskit Fall Fest 2026 Hackathon · Domain 6: Energy & Smart Infrastructure", { run: { color: "52514E" }, para: { spacing: { after: 60 } } }),
-  p([b("Team: "), "[team name and members]"], { para: { spacing: { after: 40 } } }),
+  p([b("Team: "), "Runtime Terrors: Abdul Zakir (team lead), Muhammad Kashif, Huzefa Aslam"], { para: { spacing: { after: 40 } } }),
   p([b("Code: "), link("github.com/abzakir/FairShed", "https://github.com/abzakir/FairShed")], { para: { spacing: { after: 40 } } }),
   p([b("Video: "), "[3-minute pitch and demo link]"], { para: { spacing: { after: 240 } } }),
 
@@ -239,7 +239,7 @@ const children = [
 ];
 
 const doc = new Document({
-  creator: "FairShed team",
+  creator: "Runtime Terrors",
   title: "FairShed: a quantum scheduler for fair load shedding",
   styles: {
     default: {

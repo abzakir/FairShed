@@ -2,6 +2,8 @@
 
 **Qiskit Fall Fest 2026 Hackathon · Domain 6: Energy & Smart Infrastructure**
 
+**Team Runtime Terrors:** Abdul Zakir (team lead), Muhammad Kashif, Huzefa Aslam
+
 When electricity supply falls short, a distribution company has to decide which
 feeders go dark in which hour. A fixed priority list always cuts the same
 neighbourhoods. FairShed formulates the decision as a quadratic binary
