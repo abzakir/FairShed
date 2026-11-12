@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.claude/
+node_modules/
+package-lock.json
+package.json
+results/run_log.txt
+
+# Local-only files: the organisers' brief and the video script
+Qiskit_Hackathon_Optimization.docx
+VIDEO_SCRIPT.md
