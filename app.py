@@ -23,8 +23,10 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 from fairshed import Feeder, Instance, default_weights
+from fairshed.cityview import city_view_html
 from fairshed.analysis import describe, exact_reference, greedy_index
 from fairshed.schedule import (
     notice_lines,
@@ -87,6 +89,30 @@ table.fs-grid.compact tr.fs-foot td {font-size: .72rem;}
           font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .9rem;}
 .fs-step .t {font-size: .93rem; color: #0b0b0b;}
 .fs-step .t b {display: block;}
+.fs-hero {border-radius: 18px; padding: 1.5rem 1.8rem 1.4rem; margin-bottom: 1rem; color: #fff;
+  background: radial-gradient(900px 300px at 88% -30%, #2f55a888, transparent 62%),
+              linear-gradient(135deg, #0a1226 0%, #15254a 62%, #1c3a6e 100%);}
+.fs-hero .eyebrow {font-size: .74rem; letter-spacing: .09em; text-transform: uppercase; color: #9db7e8;
+  font-weight: 700; margin-bottom: .35rem;}
+.fs-hero .fs-title {color: #fff !important;}
+.fs-hero .fs-tag {color: #d5def0 !important; margin-bottom: 0 !important;}
+.fs-kpi {box-shadow: 0 10px 26px -20px #0f1b3366; transition: transform .15s, box-shadow .15s;}
+.fs-kpi:hover {transform: translateY(-2px); box-shadow: 0 16px 30px -18px #0f1b3380;}
+.fs-kpi.accent {background: linear-gradient(135deg, #0f1b33, #1c3a6e); border: none;}
+.fs-kpi.accent .l, .fs-kpi.accent .s {color: #c5d3ee;}
+.fs-kpi.accent .v {color: #fff;}
+td.fs-on {background: #fff4d9; color: #8a5a00;}
+.stTabs [data-baseweb="tab-list"] {gap: .35rem; background: #f1f3f8; padding: .3rem; border-radius: 12px;
+  width: fit-content;}
+.stTabs [data-baseweb="tab"] {border-radius: 9px; padding: .4rem 1rem; height: auto; font-weight: 600;}
+.stTabs [aria-selected="true"] {background: #fff; box-shadow: 0 1px 3px #0f1b3326;}
+.stTabs [data-baseweb="tab-highlight"], .stTabs [data-baseweb="tab-border"] {display: none;}
+[data-testid="stBaseButton-primary"] {background: linear-gradient(135deg, #2a78d6, #184f95) !important;
+  border: none !important; font-weight: 700 !important; border-radius: 12px !important;
+  padding: .7rem 1rem !important; box-shadow: 0 10px 22px -12px #2a78d6;}
+[data-testid="stBaseButton-primary"]:hover {filter: brightness(1.08);}
+.fs-foot {margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e6e8ef; font-size: .82rem;
+  color: #52514e; text-align: center;}
 </style>
 """,
     unsafe_allow_html=True,
@@ -195,12 +221,21 @@ with st.sidebar:
 # --------------------------------------------------------------------------
 # Header
 # --------------------------------------------------------------------------
-st.markdown('<p class="fs-title">⚡ FairShed</p>', unsafe_allow_html=True)
 st.markdown(
+    '<div class="fs-hero"><div class="eyebrow">Qiskit Fall Fest 2026 · Energy &amp; Smart Infrastructure</div>'
+    '<p class="fs-title">⚡ FairShed</p>'
     '<p class="fs-tag">Quantum-optimised load shedding: cover the shortfall, protect critical '
-    "feeders, share the burden fairly.</p>",
+    "feeders, share the burden fairly.</p></div>",
     unsafe_allow_html=True,
 )
+
+
+def footer() -> None:
+    st.markdown(
+        '<div class="fs-foot">Built by Team Runtime Terrors · Abdul Zakir, Muhammad Kashif, '
+        "Huzefa Aslam · Qiskit Fall Fest 2026 · simulated with Qiskit</div>",
+        unsafe_allow_html=True,
+    )
 
 # --------------------------------------------------------------------------
 # Validate inputs
@@ -375,6 +410,11 @@ def caption_for(d: dict) -> str:
 if run:
     st.session_state["planned"] = spec
 if st.session_state.get("planned") != spec:
+    components.html(
+        city_view_html(inst, [("Priority list", greedy["index"], caption_for(greedy))], protected,
+                       "Tonight under a fixed priority list"),
+        height=404,
+    )
     left, right = st.columns([3, 2], gap="large")
     with left:
         st.markdown('<p class="fs-h">What a fixed priority list would do</p>', unsafe_allow_html=True)
@@ -389,6 +429,7 @@ if st.session_state.get("planned") != spec:
             "against the exact answer.</div>",
             unsafe_allow_html=True,
         )
+    footer()
     st.stop()
 
 # --------------------------------------------------------------------------
@@ -432,6 +473,12 @@ with tab_plan:
             f"priority list: {greedy['social_cost']:.1f}"),
     ]
     st.markdown('<div class="fs-kpis">' + "".join(cards) + "</div>", unsafe_allow_html=True)
+    components.html(
+        city_view_html(inst, [("FairShed plan", qaoa["index"], caption_for(qaoa)),
+                              ("Priority list", greedy["index"], caption_for(greedy))],
+                       protected, "Tonight on the grid"),
+        height=404,
+    )
 
     left, right = st.columns([3, 2], gap="large")
     with left:
@@ -636,3 +683,5 @@ with tab_how:
         arch = ROOT / "figures" / "architecture.png"
         if arch.exists():
             st.image(str(arch), width="stretch")
+
+footer()

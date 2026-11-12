@@ -49,7 +49,7 @@ random valid guess.
 - **Inputs:** an editable feeder table (name, social cost, hours already off today,
   protect flag), the shortfall for each hour, and a fairness level. Five ready-made
   scenarios are included.
-- **Outputs:** the schedule grid, a plain-language outage notice, CSV/TXT downloads,
+- **Outputs:** an animated city view showing which districts go dark in each hour, the schedule grid, a plain-language outage notice, CSV/TXT downloads,
   a three-way comparison (priority list, exact optimum, QAOA), and the quantum
   details (measurement distribution, tuning curve, gate counts, circuit drawing).
 - **Verification:** every plan is checked against the exact brute-force answer.
